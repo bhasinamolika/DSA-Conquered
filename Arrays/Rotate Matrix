@@ -1,0 +1,38 @@
+public class Solution {
+    public void rotate(ArrayList<ArrayList<Integer>> arr) {
+        for (int i = 0; i < arr.size(); i++) {
+            for (int j = i; j < arr.size(); j++) {
+
+                //int temp = arr[i][j];
+                int temp = arr.get(i).get(j);
+
+                //arr[i][j] = arr[j][i];
+                ArrayList<Integer> la = arr.get(i);
+                la.set(j, arr.get(j).get(i));
+                arr.set(i, la);
+
+                //arr[j][i] = temp;
+                ArrayList<Integer> lb = arr.get(j);
+                lb.set(i, temp);
+                arr.set(j, lb);
+            }
+        }
+
+        for (int i = 0; i < arr.size(); i++) {
+            ArrayList<Integer> list = arr.get(i);
+            for (int j = 0; j < arr.size()/2; j++) {
+
+                //int temp = arr[i][j];
+                int temp = arr.get(i).get(j);
+
+                //arr[i][j] = arr[i][arr.length - 1 - j];
+                list.set(j, arr.get(i).get(arr.size() - 1- j));
+                arr.set(i, list);
+
+                //arr[i][arr.length - 1 - j] = temp;
+                list.set(arr.size() -1 - j, temp);
+                arr.set(i, list);
+            }
+        }
+    }
+}
