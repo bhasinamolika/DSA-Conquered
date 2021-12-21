@@ -1,0 +1,45 @@
+Print Nodes at distance k:
+Problem:
+Given a value K and a root of the tree, we have to print all nodes that are at a distance of K from the given root.
+
+Approach:
+Make a recursive function, which has three parameters, a Node, the Kth value and a pointer, which checks at which level we are, and if this matches with the value of k, then print the key value of that node. Else, check the left and right parts of the root but with an increased value of that pointer using the recursive call.
+
+Code:
+
+class Node{
+    int key;
+    Node left;
+    Node right;
+    Node(int k){
+        key = k;
+    }
+}
+public class prac {
+    public static void main(String[] args) {
+        Node root = new Node(10);
+        root.left = new Node(6);
+        root.right = new Node(8);
+        root.right.right = new Node(7);
+        root.right.right.left = new Node(11);
+        root.right.right.right = new Node(12);
+        int ch = 0;
+        int k=3;
+        ht(root,k,ch);
+    }
+    static void ht(Node root, int k, int c){
+        if(root!=null){
+            if(c==k){
+                System.out.print(root.key+" ");
+            }
+            else{
+                ht(root.left,k,c+1);
+                ht(root.right,k,c+1);
+            }
+        }
+    }
+}
+
+TC: O(n)
+Auxiliary Space:  O(h), where: h= height of the tree
+
