@@ -1,0 +1,62 @@
+Given a string A representing an absolute path for a file (Unix-style).
+
+Return the string A after simplifying the absolute path.
+
+Note:
+
+Absolute path always begin with ’/’ ( root directory ).
+
+Path will not have whitespace characters.
+
+
+
+
+Input Format
+
+The only argument given is string A.
+Output Format
+
+Return a string denoting the simplified absolue path for a file (Unix-style).
+For Example
+
+Input 1:
+    A = "/home/"
+Output 1:
+    "/home"
+
+Input 2:
+    A = "/a/./b/../../c/"
+Output 2:
+    "/c"
+    
+    <___________________________________________________________________________________________>
+    public class Solution {
+    public String simplifyPath(String a) {
+        if (a.isEmpty() || a.equals("/")) return "/";
+
+        String[] segments = a.split("/");
+
+        Stack<String> nameStack = new Stack<>();
+
+        for (int i = 0; i < segments.length; i++) {
+            String curr = segments[i];
+            if (curr.isEmpty() || curr.equals(".")) continue;
+
+            if (curr.equals("..")) {
+                if (!nameStack.isEmpty()) nameStack.pop();
+                continue;
+            }
+
+            nameStack.push(curr);
+        }
+
+        StringBuilder path = new StringBuilder();
+        for (String name : nameStack) {
+            path.append("/");
+            path.append(name);
+        }
+        if (path.length() == 0) path.append("/");
+
+        return path.toString();
+    }
+}
