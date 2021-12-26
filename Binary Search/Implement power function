@@ -1,0 +1,51 @@
+Problem Description
+ 
+ 
+
+Implement pow(x, n) % d.
+In other words, given x, n and d,
+
+find (xn % d)
+
+Note that remainders on division cannot be negative. In other words, make sure the answer you return is non negative.
+
+
+
+Problem Constraints
+-109 <= x <= 109
+0 <= n <= 109
+1 <= d <= 109
+
+
+Example Input
+x = 2
+n = 3
+d = 3
+
+
+Example Output
+2
+
+
+Example Explanation
+23 % 3 = 8 % 3 = 2.
+
+<___________________________________________________________________________________________________________________________>
+SOLUTION:
+
+public class Solution {
+    public int pow(int x, int n, int d) {
+        int ans = (int)pow(x*1L, n*1L, d*1L);
+        return ans < 0 ? d + ans : ans;
+    }
+    long pow(long x, long n, long d){
+        if(x == 0)
+            return 0;
+        if(n == 0)
+            return 1;
+        long temp = pow(x, n/2, d)%d;
+        if(n % 2 == 0)
+            return (temp*temp)%d;
+        return (((temp*temp)%d)*x)%d;
+    }
+}
