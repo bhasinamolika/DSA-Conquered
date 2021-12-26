@@ -1,0 +1,83 @@
+Problem Description
+
+Given a linked list A , reverse the order of all nodes at even positions.
+
+
+
+Problem Constraints
+1 <= Size of linked list <= 100000
+
+
+
+Input Format
+First and only argument is the head of the Linked-List A.
+
+
+
+Output Format
+Return the head of the new linked list.
+
+
+
+Example Input
+Input 1:
+
+A = 1 -> 2 -> 3 -> 4
+Input 2:
+
+A = 1 -> 2 -> 3
+
+
+Example Output
+Output 1:
+
+ 1 -> 4 -> 3 -> 2
+Output 2:
+
+ 1 -> 2 -> 3
+
+
+Example Explanation
+Explanation 1:
+
+Nodes are positions 2 and 4 have been swapped.
+Explanation 2:
+
+No swapping neccassary here.
+
+<____________________________________________________________________________>
+
+SOLUTION:
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public ListNode solve(ListNode A) {
+        ListNode temp = A;
+        ArrayList<Integer> even = new ArrayList<Integer>();
+        int count = 0;
+        while(temp != null) {
+            count++;
+            if(count % 2 == 0) {
+                even.add(temp.val);
+            }
+            temp = temp.next;
+        }
+        temp = A; count = 0;
+        int idx = 1;
+        while(temp != null) {
+            count++;
+            if(count % 2 == 0) {
+                temp.val = even.get(even.size()-idx);
+                idx++;
+            }
+            temp = temp.next;
+        }
+        return A;
+    }
+}
